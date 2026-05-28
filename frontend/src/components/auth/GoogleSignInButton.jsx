@@ -3,7 +3,7 @@ import { authApi } from '../../api/auth.api';
 
 // Backend OAuth entry point (full-page redirect, not an XHR — cookies get set
 // server-side and the user is bounced back to the frontend).
-const GOOGLE_AUTH_URL = 'http://localhost:4000/api/v1/auth/google';
+const GOOGLE_AUTH_URL = (import.meta.env.VITE_API_URL || '/api/v1') + '/auth/google';
 
 function GoogleIcon() {
   return (

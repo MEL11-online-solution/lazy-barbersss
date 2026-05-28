@@ -5,6 +5,7 @@ import { Link, useLocation } from 'wouter';
 import { authApi } from '../../api/auth.api';
 import { useToast } from '../../context/ToastContext';
 import GoogleSignInButton from '../../components/auth/GoogleSignInButton';
+import PasswordInput from '../../components/common/PasswordInput';
 
 const schema = z
   .object({
@@ -84,12 +85,12 @@ export default function SignUpPage() {
             </div>
             <div>
               <label className="form-label">Password</label>
-              <input type="password" className="form-input" placeholder="Min. 8 characters" {...register('password')} />
+              <PasswordInput className="form-input" placeholder="Min. 8 characters" {...register('password')} />
               {errors.password && <p className="form-error">{errors.password.message}</p>}
             </div>
             <div>
               <label className="form-label">Confirm password</label>
-              <input type="password" className="form-input" placeholder="Repeat your password" {...register('confirm_password')} />
+              <PasswordInput className="form-input" placeholder="Repeat your password" {...register('confirm_password')} />
               {errors.confirm_password && <p className="form-error">{errors.confirm_password.message}</p>}
             </div>
             <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">

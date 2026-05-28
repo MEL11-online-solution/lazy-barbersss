@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { authApi } from '../../api/auth.api';
 import { useToast } from '../../context/ToastContext';
+import PasswordInput from '../../components/common/PasswordInput';
 
 const emailSchema = z.object({ email: z.string().trim().toLowerCase().email('Invalid email') });
 const codeSchema = z.object({ code: z.string().regex(/^\d{6}$/u, 'Code must be 6 digits') });
@@ -169,12 +170,12 @@ function StepNewPassword({ email, code, onDone }) {
     <form onSubmit={handleSubmit(submit)} className="space-y-4 text-left">
       <div>
         <label className="form-label">New password</label>
-        <input type="password" className="form-input" placeholder="Min. 8 characters" {...register('password')} />
+        <PasswordInput className="form-input" placeholder="Min. 8 characters" {...register('password')} />
         {errors.password && <p className="form-error">{errors.password.message}</p>}
       </div>
       <div>
         <label className="form-label">Confirm password</label>
-        <input type="password" className="form-input" placeholder="Repeat" {...register('confirm')} />
+        <PasswordInput className="form-input" placeholder="Repeat" {...register('confirm')} />
         {errors.confirm && <p className="form-error">{errors.confirm.message}</p>}
       </div>
       <button type="submit" disabled={isSubmitting} className="btn-primary w-full">

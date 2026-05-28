@@ -151,10 +151,18 @@ export default function HomePage() {
           <div ref={teamRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
             {barbers.map((b) => (
               <div key={b.id} className="card overflow-hidden">
-                <div className="h-48 bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center">
-                  <span className="font-display text-6xl keep-white">
-                    {initials(b.first_name, b.last_name)}
-                  </span>
+                <div className="h-48 overflow-hidden bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center">
+                  {b.avatar_url ? (
+                    <img
+                      src={b.avatar_url}
+                      alt={`${b.first_name} ${b.last_name}`}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="font-display text-6xl keep-white">
+                      {initials(b.first_name, b.last_name)}
+                    </span>
+                  )}
                 </div>
                 <div className="p-5 text-center">
                   <h3 className="font-display tracking-wider uppercase text-xl">{b.first_name}</h3>

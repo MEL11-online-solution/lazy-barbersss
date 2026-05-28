@@ -6,6 +6,7 @@ import { Link, useLocation } from 'wouter';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import GoogleSignInButton from '../../components/auth/GoogleSignInButton';
+import PasswordInput from '../../components/common/PasswordInput';
 
 const schema = z.object({
   email: z.string().trim().toLowerCase().email('Invalid email'),
@@ -42,6 +43,10 @@ export default function SignInPage() {
       if (user.role === 'barber') return navigate('/barber');
       navigate('/home');
     } catch (e) {
+      if (e.code === 'EMAIL_NOT_VERIFIED') {
+        toast.error('Please verify your email first — taking you there.');
+        return navigate(`/verify-email?email=${encodeURIComponent(values.email)}`);
+      }
       toast.error(e.message || 'Sign-in failed');
     }
   }
@@ -69,7 +74,7 @@ export default function SignInPage() {
             </div>
             <div>
               <label className="form-label">Password</label>
-              <input type="password" className="form-input" placeholder="Enter your password" {...register('password')} />
+              <PasswordInput className="form-input" placeholder="Enter your password" {...register('password')} />
               {errors.password && <p className="form-error">{errors.password.message}</p>}
               <div className="mt-2 flex items-center justify-between">
                 <label className="flex items-center gap-2 cursor-pointer select-none">
