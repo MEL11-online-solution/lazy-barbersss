@@ -74,9 +74,10 @@ export default function Navbar() {
             </>
           ) : (
             <div className="flex items-center gap-3 text-sm">
-              <span style={{ color: 'var(--lb-text-muted)' }}>
+              <Link href="/profile" className="hover:text-pink-400 transition-colors" style={{ color: 'var(--lb-text-muted)' }}>
                 Welcome, <span className="font-semibold" style={{ color: 'var(--lb-text)' }}>{user.first_name}</span>
-              </span>
+              </Link>
+              <Link href="/profile" className="btn-ghost btn-sm">Profile</Link>
               <button onClick={logout} className="btn-ghost btn-sm">Sign Out</button>
             </div>
           )}
@@ -130,7 +131,10 @@ export default function Navbar() {
                   <Link href="/sign-up" onClick={() => setMobileOpen(false)} className="btn-primary btn-sm flex-1">Sign Up</Link>
                 </>
               ) : (
-                <button onClick={() => { setMobileOpen(false); logout(); }} className="btn-ghost btn-sm w-full">Sign Out</button>
+                <>
+                  <Link href="/profile" onClick={() => setMobileOpen(false)} className="btn-secondary btn-sm w-full text-center">Profile</Link>
+                  <button onClick={() => { setMobileOpen(false); logout(); }} className="btn-ghost btn-sm w-full">Sign Out</button>
+                </>
               )}
             </li>
           </ul>
