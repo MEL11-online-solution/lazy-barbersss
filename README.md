@@ -134,7 +134,7 @@ Visit **http://localhost:5173**.
 
 | Role   | Email                       | Password    |
 |--------|-----------------------------|-------------|
-| Admin  | `admin@lazybarbers.com`     | `Admin123!` |
+| Admin  | `adminlazybarbers@gmail.com`     | `Admin123!` |
 | Barber | `jase@lazybarbers.com`      | `Barber123!`|
 | Barber | `pawan@lazybarbers.com`     | `Barber123!`|
 | Barber | `sarun@lazybarbers.com`     | `Barber123!`|
