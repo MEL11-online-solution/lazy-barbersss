@@ -11,6 +11,7 @@ module.exports = {
     user: process.env.DB_USER || 'lazy',
     password: process.env.DB_PASSWORD || 'lazypass',
     database: process.env.DB_NAME || 'lazybarbers',
+    ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
   },
   verbose: true,
   strict: true,

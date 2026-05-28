@@ -31,6 +31,8 @@ const pool = mysql.createPool({
   // Force the session timezone to UTC so TIMESTAMP literals are stored
   // and read consistently regardless of the host machine.
   timezone: 'Z',
+    ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
+
 });
 
 const db = drizzle(pool, { schema, mode: 'default' });
