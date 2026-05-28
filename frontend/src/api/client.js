@@ -12,7 +12,7 @@ import axios from 'axios';
  *   - on error → throws an Error with .code, .message, .details, .status
  */
 const client = axios.create({
-  baseURL: '/api/v1',
+    baseURL: import.meta.env.VITE_API_URL || '/api/v1',
   withCredentials: true, // include httpOnly auth cookie
   headers: { 'Content-Type': 'application/json' },
 });
