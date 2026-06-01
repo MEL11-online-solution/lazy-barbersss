@@ -32,7 +32,13 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-navy-500/30 bg-navy-900 mt-12">
+    <footer
+      className="mt-12"
+      style={{
+        backgroundColor: 'var(--lb-bg-card)',
+        borderTop: '1px solid var(--lb-border)',
+      }}
+    >
       <div className="container-page py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         {/* Brand */}
         <div className="lg:col-span-2">
@@ -45,7 +51,9 @@ export default function Footer() {
               loading="lazy"
             />
           </Link>
-          <p className="mt-3 text-sm text-white/60">Precision cuts. Premium experience. No waiting.</p>
+          <p className="mt-3 text-sm" style={{ color: 'var(--lb-text-muted)' }}>
+            Precision cuts. Premium experience. No waiting.
+          </p>
           <div className="flex gap-2 mt-4">
             {SOCIAL_LINKS.map(({ label, href, icon }) => (
               <a
@@ -54,14 +62,15 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="w-9 h-9 rounded-md border border-navy-500/40 flex items-center justify-center text-white/60 hover:text-pink-500 hover:border-pink-500/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
+                className="w-9 h-9 rounded-md flex items-center justify-center hover:text-pink-500 hover:border-pink-500/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
+                style={{ color: 'var(--lb-text-muted)', border: '1px solid var(--lb-border)' }}
               >
                 {icon}
               </a>
             ))}
           </div>
           {/* Locations */}
-          <div className="mt-5 space-y-2 text-sm text-white/60">
+          <div className="mt-5 space-y-2 text-sm" style={{ color: 'var(--lb-text-muted)' }}>
             <p><span className="text-pink-500">📍</span> 15 Good St, Granville NSW 2142</p>
             <p><span className="text-pink-500">📍</span> 62 Beamish St, Campsie NSW 2194</p>
           </div>
@@ -70,7 +79,7 @@ export default function Footer() {
         {/* Quick Links */}
         <div>
           <h4 className="text-xs font-display uppercase tracking-widest text-gold-brand mb-3">Quick Links</h4>
-          <ul className="text-sm space-y-2 text-white/80">
+          <ul className="text-sm space-y-2" style={{ color: 'var(--lb-text)' }}>
             <li><Link href="/home" className="hover:text-pink-500 transition-colors">Home</Link></li>
             <li><Link href="/services" className="hover:text-pink-500 transition-colors">Services</Link></li>
             <li><Link href="/gallery" className="hover:text-pink-500 transition-colors">Gallery</Link></li>
@@ -86,13 +95,13 @@ export default function Footer() {
         {/* Hours */}
         <div>
           <h4 className="text-xs font-display uppercase tracking-widest text-gold-brand mb-3">Hours</h4>
-          <ul className="text-sm space-y-1 text-white/80">
-            <li>Mon – Fri: <span className="text-white">9 am – 7 pm</span></li>
-            <li>Saturday: <span className="text-white">9 am – 7 pm</span></li>
-            <li>Sunday: <span className="text-white">9 am – 7 pm</span></li>
+          <ul className="text-sm space-y-1" style={{ color: 'var(--lb-text-muted)' }}>
+            <li>Mon – Fri: <span style={{ color: 'var(--lb-text)' }}>9 am – 7 pm</span></li>
+            <li>Saturday: <span style={{ color: 'var(--lb-text)' }}>9 am – 7 pm</span></li>
+            <li>Sunday: <span style={{ color: 'var(--lb-text)' }}>9 am – 7 pm</span></li>
           </ul>
           <h4 className="text-xs font-display uppercase tracking-widest text-gold-brand mb-3 mt-6">Awards</h4>
-          <ul className="text-sm space-y-1 text-white/70">
+          <ul className="text-sm space-y-1" style={{ color: 'var(--lb-text-muted)' }}>
             <li>🥇 Local Business Award 2024</li>
             <li>🥇 ABA Finalist 2024</li>
           </ul>
@@ -101,17 +110,20 @@ export default function Footer() {
         {/* Contact */}
         <div>
           <h4 className="text-xs font-display uppercase tracking-widest text-gold-brand mb-3">Contact</h4>
-          <ul className="text-sm space-y-2 text-white/80">
+          <ul className="text-sm space-y-2" style={{ color: 'var(--lb-text)' }}>
             <li className="flex gap-2 items-start"><span className="text-pink-500">📞</span> <a href="tel:+61416065592" className="hover:text-pink-500 transition-colors">+61 416 065 592</a></li>
             <li className="flex gap-2 items-start"><span className="text-pink-500">✉️</span> <a href="mailto:hello@lazybarbers.com.au" className="hover:text-pink-500 transition-colors">hello@lazybarbers.com.au</a></li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-navy-500/30">
-        <div className="container-page py-4 flex flex-col md:flex-row items-center justify-between text-xs text-white/50 gap-2">
+      <div style={{ borderTop: '1px solid var(--lb-border)' }}>
+        <div
+          className="container-page py-4 flex flex-col md:flex-row items-center justify-between text-xs gap-2"
+          style={{ color: 'var(--lb-text-muted)' }}
+        >
           <span>© {new Date().getFullYear()} Lazy Barbers. All rights reserved.</span>
           <div className="flex gap-4">
-            <Link href="/about#terms" className="hover:text-white/80 transition-colors">Terms &amp; Conditions</Link>
+            <Link href="/about#terms" className="hover:text-pink-500 transition-colors">Terms &amp; Conditions</Link>
             <span>ABN: 00 000 000 000</span>
           </div>
         </div>

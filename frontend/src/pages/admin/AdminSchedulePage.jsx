@@ -4,6 +4,26 @@ import { formatTime, statusLabel, initials } from '../../lib/format';
 import { PageLoader } from '../../components/common/Spinner';
 import { useToast } from '../../context/ToastContext';
 
+function BarberAvatar({ barber }) {
+  const [failed, setFailed] = useState(false);
+  const fullName = `${barber.first_name || ''} ${barber.last_name || ''}`.trim();
+  if (barber.avatar_url && !failed) {
+    return (
+      <img
+        src={barber.avatar_url}
+        alt={fullName}
+        onError={() => setFailed(true)}
+        className="w-10 h-10 rounded-full object-cover"
+      />
+    );
+  }
+  return (
+    <div className="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center text-sm font-bold keep-white">
+      {initials(barber.first_name, barber.last_name)}
+    </div>
+  );
+}
+
 export default function AdminSchedulePage() {
   const toast = useToast();
   const today = new Date().toISOString().slice(0, 10);
@@ -46,9 +66,7 @@ export default function AdminSchedulePage() {
           {schedule.map(({ barber, bookings }) => (
             <div key={barber.id} className="card-padded">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center text-sm font-bold keep-white">
-                  {initials(barber.first_name, barber.last_name)}
-                </div>
+                <BarberAvatar barber={barber} />
                 <div>
                   <p className="font-display tracking-wider uppercase" style={{ color: 'var(--lb-text)' }}>{barber.first_name} {barber.last_name}</p>
                   <p className="text-xs" style={{ color: 'var(--lb-text-muted)' }}>{barber.specialty || 'Barber'}</p>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Link, useLocation } from 'wouter';
 import { useAuth } from '../../context/AuthContext';
-import { adminApi } from '../../api';
+import { adminApi, barberPortalApi } from '../../api';
 import { formatDateTime } from '../../lib/format';
 
 const NOTIF_SEEN_KEY = 'lb_admin_notifications_seen';
@@ -28,6 +28,18 @@ export default function DashboardLayout({ children, role = 'admin' }) {
   const { user, logout } = useAuth();
   const links = role === 'admin' ? ADMIN_LINKS : BARBER_LINKS;
   const portalLabel = role === 'admin' ? 'ADMIN PORTAL' : 'BARBER PORTAL';
+  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [avatarFailed, setAvatarFailed] = useState(false);
+
+  useEffect(() => {
+    if (role !== 'barber') return;
+    let alive = true;
+    barberPortalApi
+      .me()
+      .then((b) => { if (alive) setAvatarUrl(b?.avatar_url || null); })
+      .catch(() => { if (alive) setAvatarUrl(null); });
+    return () => { alive = false; };
+  }, [role]);
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row" style={{ backgroundColor: 'var(--lb-bg)' }}>
@@ -96,9 +108,18 @@ export default function DashboardLayout({ children, role = 'admin' }) {
             <span className="font-semibold" style={{ color: 'var(--lb-text)' }}>
               {user?.first_name} {user?.last_name}
             </span>
-            <span className="keep-white w-9 h-9 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">
-              {(user?.first_name || '').charAt(0)}
-            </span>
+            {avatarUrl && !avatarFailed ? (
+              <img
+                src={avatarUrl}
+                alt={`${user?.first_name || ''} ${user?.last_name || ''}`.trim() || 'Profile'}
+                onError={() => setAvatarFailed(true)}
+                className="w-9 h-9 rounded-full object-cover"
+              />
+            ) : (
+              <span className="keep-white w-9 h-9 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">
+                {(user?.first_name || '').charAt(0)}
+              </span>
+            )}
           </div>
         </div>
         <div className="px-6 lg:px-10 py-8">{children}</div>
